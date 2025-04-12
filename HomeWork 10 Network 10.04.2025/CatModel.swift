@@ -10,7 +10,7 @@ import Foundation
 
 struct CatFact: Decodable {
     let fact: String
-    let lengh: Int
+    let length: Int
 }
 
 struct CatImage: Decodable {

@@ -59,26 +59,46 @@ final class NetworkService {
     }
     
     // MARK: - Cat Fact (1 случайный факт)
-        func fetchRandomCatFact(completion: @escaping (Result<String, Error>) -> Void) {
-            let url = URL(string: "https://catfact.ninja/fact")!
+//        func fetchRandomCatFact(completion: @escaping (Result<String, Error>) -> Void) {
+//            let url = URL(string: "https://catfact.ninja/fact")!
+//
+//            URLSession.shared.dataTask(with: url) { data, _, error in
+//                if let error = error {
+//                    completion(.failure(error))
+//                    return
+//                }
+//
+//                do {
+//                    let fact = try JSONDecoder().decode([String: String].self, from: data!)
+//                    guard let factText = fact["fact"] else {
+//                        throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Fact not found"])
+//                    }
+//                    completion(.success(factText))
+//                } catch {
+//                    completion(.failure(error))
+//                }
+//            }.resume()
+//        }
+    
+    func fetchRandomCatFact(completion: @escaping (Result<String, Error>) -> Void) {
+        let url = URL(string: "https://catfact.ninja/fact")!
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
             
-            URLSession.shared.dataTask(with: url) { data, _, error in
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-                
-                do {
-                    let fact = try JSONDecoder().decode([String: String].self, from: data!)
-                    guard let factText = fact["fact"] else {
-                        throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Fact not found"])
-                    }
-                    completion(.success(factText))
-                } catch {
-                    completion(.failure(error))
-                }
-            }.resume()
-        }
+            do {
+                let factResponse = try JSONDecoder().decode(CatFact.self, from: data!) // Используем CatFact
+                completion(.success(factResponse.fact))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+    
+    
     }
     
     
