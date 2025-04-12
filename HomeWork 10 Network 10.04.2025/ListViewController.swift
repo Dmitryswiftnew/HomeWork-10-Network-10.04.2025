@@ -16,6 +16,7 @@ class ListViewController: UITableViewController {
            super.viewDidLoad()
         
            loadCats() // Загружаем данные при запуске
+        setupRefreshControl()
        }
     
     
@@ -29,7 +30,7 @@ class ListViewController: UITableViewController {
     @objc private func refreshCats(_ sender: UIRefreshControl) {
         NetworkService.shared.fetchTenCats { [weak self] result in
             DispatchQueue.main.async {
-                sender.endRefreshing()
+                sender.endRefreshing() // Останавливаем индикатор
                 switch result {
                 case .success(let newCats):
                     self?.cats = newCats
