@@ -13,7 +13,25 @@ class ImageViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        navigationController?.navigationBar.tintColor = .systemOrange // Цвет кнопок
+        navigationController?.navigationBar.barTintColor = .systemBackground // Фон
+        title = "Случайный кот"
+        setupRefreshButton()
         activityIndicator.startAnimating()
+        loadRandomContent()
+    }
+    
+    private func setupRefreshButton() {
+        let refreshButton = UIBarButtonItem(
+            barButtonSystemItem: .refresh, // иконка обновить
+            target: self, // Объект, который обработает нажатие
+            action: #selector(refreshButtonTapped) // метод который вызовется
+        )
+        navigationItem.rightBarButtonItem = refreshButton // размещаем справа
+    }
+    
+    @objc private func refreshButtonTapped() {
+        activityIndicator.stopAnimating()
         loadRandomContent()
     }
     
