@@ -14,10 +14,10 @@ class ImageViewController: UIViewController {
     
     override func viewDidLoad() {
         activityIndicator.startAnimating()
-        loadRandomCat()
+        loadRandomContent()
     }
     
-    private func loadRandomCat() {
+    private func loadRandomContent() {
         NetworkService.shared.fetchRandomCat { [weak self] (result: Result<CatImage, Error>) in // Явно указываем тип
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
