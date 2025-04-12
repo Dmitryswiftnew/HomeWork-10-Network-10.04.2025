@@ -26,13 +26,20 @@ class ImageViewController: UIViewController {
             barButtonSystemItem: .refresh, // иконка обновить
             target: self, // Объект, который обработает нажатие
             action: #selector(refreshButtonTapped) // метод который вызовется
+            
         )
         navigationItem.rightBarButtonItem = refreshButton // размещаем справа
+        
+        
     }
     
     @objc private func refreshButtonTapped() {
         activityIndicator.stopAnimating()
         loadRandomContent()
+        
+        
+        
+        
     }
     
     private func loadRandomContent() {
