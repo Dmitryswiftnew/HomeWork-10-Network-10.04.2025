@@ -134,6 +134,13 @@ class ImageViewController: UIViewController {
 
 extension UIImageView {
     func loadImage(from urlString: String) {
+        // проверяем кэш
+        if let cacheImage = ImageCache.shared.get(forKey: urlString) {
+            self.image = cacheImage
+            return
+        }
+        
+        
         guard let url = URL(string: urlString) else {
             self.image = UIImage(systemName: "photo.on.rectangle")
             return
@@ -141,6 +148,9 @@ extension UIImageView {
         
         URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
             if let data = data, let image = UIImage(data: data) {
+                // сохраняем в кэш
+                ImageCache.shared.set(image, forKey: urlString)
+                
                 DispatchQueue.main.async {
                     self?.image = image
                 }

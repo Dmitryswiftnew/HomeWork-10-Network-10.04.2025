@@ -10,6 +10,7 @@
 		0AB1E2D92DA90C23009778E7 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB1E2D82DA90C23009778E7 /* UIImageView+Extensions.swift */; };
 		0AB1E2DB2DA91218009778E7 /* CatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB1E2DA2DA91218009778E7 /* CatModel.swift */; };
 		0AB1E2DD2DA912E6009778E7 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB1E2DC2DA912E6009778E7 /* NetworkService.swift */; };
+		0AB1E2DF2DAB9586009778E7 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB1E2DE2DAB9586009778E7 /* ImageCache.swift */; };
 		0ADF78382DA8130200CC88D2 /* CatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF78372DA8130200CC88D2 /* CatTableViewCell.swift */; };
 		0AE6A9052DA7D21000C2B31F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6A9042DA7D21000C2B31F /* AppDelegate.swift */; };
 		0AE6A9072DA7D21000C2B31F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6A9062DA7D21000C2B31F /* SceneDelegate.swift */; };
@@ -25,6 +26,7 @@
 		0AB1E2D82DA90C23009778E7 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		0AB1E2DA2DA91218009778E7 /* CatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatModel.swift; sourceTree = "<group>"; };
 		0AB1E2DC2DA912E6009778E7 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		0AB1E2DE2DAB9586009778E7 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		0ADF78372DA8130200CC88D2 /* CatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatTableViewCell.swift; sourceTree = "<group>"; };
 		0AE6A9012DA7D21000C2B31F /* HomeWork 10 Network 10.04.2025.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HomeWork 10 Network 10.04.2025.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AE6A9042DA7D21000C2B31F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				0AE6A90D2DA7D21100C2B31F /* Assets.xcassets */,
 				0AE6A90F2DA7D21100C2B31F /* LaunchScreen.storyboard */,
 				0AE6A9122DA7D21100C2B31F /* Info.plist */,
+				0AB1E2DE2DAB9586009778E7 /* ImageCache.swift */,
 			);
 			path = "HomeWork 10 Network 10.04.2025";
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AB1E2DF2DAB9586009778E7 /* ImageCache.swift in Sources */,
 				0AE6A9092DA7D21000C2B31F /* ViewController.swift in Sources */,
 				0AB1E2D92DA90C23009778E7 /* UIImageView+Extensions.swift in Sources */,
 				0AB1E2DB2DA91218009778E7 /* CatModel.swift in Sources */,
