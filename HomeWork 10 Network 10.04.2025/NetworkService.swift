@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 final class NetworkService {
     static let shared = NetworkService() // делаем Singleton
@@ -14,28 +15,66 @@ final class NetworkService {
     
     // Загрузка 1 случайного кота
     
-    func fetchRandomCat(completion: @escaping (Result<CatImage, Error>) -> Void) {
-        let url = URL(string: "https://api.thecatapi.com/v1/images/search")!
-        
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            do {
-                let cats = try JSONDecoder().decode([CatImage].self, from: data!)
-                guard let firstCat = cats.first else {
-                    let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No cats found"])
+//    func fetchRandomCat(completion: @escaping (Result<CatImage, Error>) -> Void) {
+//        let url = URL(string: "https://api.thecatapi.com/v1/images/search")!
+//
+//        URLSession.shared.dataTask(with: url) { data, _, error in
+//            if let error = error {
+//                completion(.failure(error))
+//                return
+//            }
+//
+//            do {
+//                let cats = try JSONDecoder().decode([CatImage].self, from: data!)
+//                guard let firstCat = cats.first else {
+//                    let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No cats found"])
+//                    completion(.failure(error))
+//                    return
+//                }
+//                completion(.success(firstCat))
+//            } catch {
+//                completion(.failure(error))
+//            }
+//        }.resume()
+//    }
+    
+    // Alamofire
+    
+    func fetchRandomCat(completion: @escaping (Result<CatImage, AFError>) -> Void) {
+        // 1. используем AF.request вместо URLSession
+        AF.request("https://api.thecatapi.com/v1/images/search")
+        // 2. автоматическая валидация статус-кодов 200..<300
+            .validate()
+        // 3. парсим JSON прямо в модель [CatImage]
+            .responseDecodable(of: [CatImage].self) { response in
+                switch response.result {
+                case .success(let cats):
+                    // 4. извлекаем первого кота
+                    guard let firstCat = cats.first else {
+                        completion(.failure(AFError.explicitlyCancelled))
+                        return
+                    }
+                    completion(.success(firstCat))
+                case .failure(let error):
                     completion(.failure(error))
-                    return
                 }
-                completion(.success(firstCat))
-            } catch {
-                completion(.failure(error))
             }
-        }.resume()
     }
+    
+    
+    // Alamofire - короткий синтаксис
+    
+//    func fetchRandomCat(completion: @escaping (Result<CatImage, AFError>) -> Void) {
+//        AF.request("https://api.thecatapi.com/v1/images/search")
+//            .validate()
+//            .responseDecodable(of: [CatImage].self) { response in
+//                completion(response.result.flatMap { cats in
+//                    cats.first.map { .success($0) } ?? .failure(.explicitlyCancelled)
+//                })
+//            }
+//    }
+
+    
     
     // Загрузка 10 котов
     
